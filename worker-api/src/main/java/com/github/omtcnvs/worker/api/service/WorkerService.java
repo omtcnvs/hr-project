@@ -28,4 +28,14 @@ public class WorkerService {
                 .ativo(workerSaved.getAtivo())
                 .build();
     }
+
+    public DetailedWorkerRecord getReferenceById(Long id) {
+        Worker workerGot = this.repository.getReferenceById(id);
+        return DetailedWorkerRecord.builder()
+                .id(workerGot.getId())
+                .name(workerGot.getName())
+                .dailyIncome(workerGot.getDailyIncome())
+                .ativo(workerGot.getAtivo())
+                .build() ;
+    }
 }
