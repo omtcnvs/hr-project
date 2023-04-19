@@ -21,21 +21,20 @@ public class WorkerService {
     public DetailedWorkerRecord save(WorkerRecord workerRecord) {
         Worker workerToSave = this.assembler.toModel(workerRecord);
         Worker workerSaved = this.repository.save(workerToSave);
+        return getDetailedWorkerRecord(workerSaved);
+    }
+
+    public DetailedWorkerRecord getReferenceById(Long id) {
+        Worker workerGot = this.repository.getReferenceById(id);
+        return getDetailedWorkerRecord(workerGot);
+    }
+
+    private DetailedWorkerRecord getDetailedWorkerRecord(Worker workerSaved) {
         return DetailedWorkerRecord.builder()
                 .id(workerSaved.getId())
                 .name(workerSaved.getName())
                 .dailyIncome(workerSaved.getDailyIncome())
                 .ativo(workerSaved.getAtivo())
                 .build();
-    }
-
-    public DetailedWorkerRecord getReferenceById(Long id) {
-        Worker workerGot = this.repository.getReferenceById(id);
-        return DetailedWorkerRecord.builder()
-                .id(workerGot.getId())
-                .name(workerGot.getName())
-                .dailyIncome(workerGot.getDailyIncome())
-                .ativo(workerGot.getAtivo())
-                .build() ;
     }
 }

@@ -25,7 +25,7 @@ public class WorkerController {
         return handleResponseSave(uriBuilder, workerSaved);
     }
 
-    private static ResponseEntity<SaveResponseRecord> handleResponseSave(UriComponentsBuilder uriBuilder, DetailedWorkerRecord workerSaved) {
+    private ResponseEntity<SaveResponseRecord> handleResponseSave(UriComponentsBuilder uriBuilder, DetailedWorkerRecord workerSaved) {
         return ResponseEntity.created(uriBuilder.path("/v1/workers/{id}").buildAndExpand(workerSaved.id()).toUri())
                 .body(SaveResponseRecord.builder()
                         .success(true)
